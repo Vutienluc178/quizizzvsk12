@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trợ Lý Quizizz - Thầy Vũ Tiến Lực</title>
+    <title>Trợ Lý Quizizz & Kahoot - Thầy Vũ Tiến Lực</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,10 +14,14 @@
         .tab-inactive { color: #6b7280; }
         .tab-inactive:hover { color: #374151; }
         .logo-gradient { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); }
+        /* Animation cho Modal */
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .modal-animate { animation: fadeIn 0.3s ease-out forwards; }
     </style>
 </head>
 <body class="p-4 md:p-8">
-    <div class="max-w-5xl mx-auto">
+    <div class="max-w-5xl mx-auto relative">
+        
         <!-- Header có Logo và Tên Tác Giả -->
         <div class="gradient-bg rounded-3xl p-6 md:p-8 mb-6 text-white shadow-xl relative overflow-hidden">
             <!-- Hiệu ứng nền mờ -->
@@ -32,17 +36,25 @@
                 
                 <!-- Thông tin tiêu đề & Tác giả -->
                 <div class="text-center md:text-left flex-1">
-                    <h1 class="text-3xl md:text-4xl font-extrabold mb-2 tracking-tight">Trợ Lý Soạn Đề Quizizz </h1>
-                    <p class="opacity-90 italic mb-4 text-sm md:text-base">"Tối ưu hóa Prompt AI & Xuất Excel chuẩn cấu trúc ma trận"</p>
+                    <h1 class="text-3xl md:text-4xl font-extrabold mb-2 tracking-tight">Trợ Lý Soạn Đề Thông Minh </h1>
+                    <p class="opacity-90 italic mb-4 text-sm md:text-base">"Tối ưu Prompt AI & Xuất Excel 2 trong 1: Chuẩn Quizizz và Kahoot!"</p>
                     
-                    <!-- Bảng tên tác giả -->
-                    <div class="inline-flex flex-col bg-white/10 backdrop-blur-md rounded-xl border border-white/20 px-5 py-3 shadow-inner">
-                        <p class="text-sm font-medium text-indigo-100 mb-1">Phát triển & Thiết kế bởi:</p>
-                        <p class="text-lg font-bold text-green-300 drop-shadow">Thầy VŨ TIẾN LỰC</p>
-                        <p class="text-xs font-medium text-white opacity-80 mt-1 flex items-center justify-center md:justify-start">
-                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-                            Trường THPT Nguyễn Hữu Cảnh - TP Hồ Chí Minh
-                        </p>
+                    <div class="flex flex-col md:flex-row items-center gap-4">
+                        <!-- Bảng tên tác giả -->
+                        <div class="inline-flex flex-col bg-white/10 backdrop-blur-md rounded-xl border border-white/20 px-5 py-3 shadow-inner">
+                            <p class="text-sm font-medium text-indigo-100 mb-1">Phát triển & Thiết kế bởi:</p>
+                            <p class="text-lg font-bold text-green-300 drop-shadow">Thầy VŨ TIẾN LỰC</p>
+                            <p class="text-xs font-medium text-white opacity-80 mt-1 flex items-center justify-center md:justify-start">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                                THPT Nguyễn Hữu Cảnh - TP. HCM
+                            </p>
+                        </div>
+
+                        <!-- Nút Mở Hướng Dẫn -->
+                        <button onclick="openGuideModal()" class="bg-yellow-400 hover:bg-yellow-300 text-yellow-900 font-bold py-3 px-6 rounded-xl shadow-lg border border-yellow-300 transition-all transform hover:-translate-y-1 flex items-center">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                            Xem Hướng Dẫn
+                        </button>
                     </div>
                 </div>
             </div>
@@ -132,7 +144,7 @@
                     1. Sinh Prompt cho AI
                 </button>
                 <button onclick="switchTab('json_import')" id="btn_tab_json_import" class="tab-inactive py-4 px-4 text-sm md:text-base focus:outline-none transition-colors font-medium text-blue-600">
-                    2. Dán JSON & Xuất
+                    2. Dán JSON & Xuất File
                 </button>
                 <button onclick="switchTab('editor')" id="btn_tab_editor" class="tab-inactive py-4 px-4 text-sm md:text-base focus:outline-none transition-colors font-medium">
                     3. Tự Soạn Thủ Công
@@ -170,15 +182,22 @@
                         <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         HƯỚNG DẪN DÀNH CHO THẦY LỰC:
                     </p>
-                    <p>Sau khi AI sinh ra bộ câu hỏi dưới dạng mã JSON (nằm trong khung đen có chữ Copy Code), thầy hãy dán toàn bộ đoạn mã đó vào khung bên dưới và bấm Xuất file.</p>
+                    <p>Sau khi AI sinh ra bộ câu hỏi dưới dạng mã JSON, thầy hãy dán toàn bộ đoạn mã đó vào khung bên dưới. Thầy có thể tùy chọn xuất ra định dạng chuẩn của <strong>Quizizz</strong> hoặc <strong>Kahoot</strong> chỉ với 1 cú click chuột.</p>
                 </div>
                 
                 <textarea id="json_input_area" rows="12" class="w-full p-5 font-mono text-sm bg-gray-900 text-green-400 rounded-xl border border-gray-700 focus:ring-2 focus:ring-green-500 focus:outline-none shadow-inner mb-4" placeholder='[\n  {\n    "QuestionText": "Nội dung...",\n    "QuestionType": "Multiple Choice",\n    ...\n  }\n]'></textarea>
                 
-                <button onclick="handleJSONExport()" class="w-full logo-gradient hover:opacity-90 text-white font-extrabold py-4 rounded-xl shadow-lg transition-all flex items-center justify-center text-lg tracking-wide uppercase">
-                    <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                    Tạo File Excel Từ Dữ Liệu AI
-                </button>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <button onclick="handleJSONExport()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-4 rounded-xl shadow-lg transition-all flex items-center justify-center text-sm md:text-base tracking-wide uppercase">
+                        <img src="https://cdn.iconscout.com/icon/free/png-256/free-quizizz-3628994-3030219.png" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3ciIHN0cm9rZS13aWR0aD0iMiI+PHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBkPSJNOSAxMmwyIDIgNC00bTYgMmE5IDkgMCAxMS0xOCAwIDkgOSAwIDAxMTggMHoiLz48L3N2Zz4='" alt="Q" class="w-6 h-6 mr-2 filter invert">
+                        Xuất Excel cho Quizizz
+                    </button>
+                    
+                    <button onclick="handleKahootExport()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-extrabold py-4 rounded-xl shadow-lg transition-all flex items-center justify-center text-sm md:text-base tracking-wide uppercase">
+                        <img src="https://cdn.iconscout.com/icon/free/png-256/free-kahoot-3628854-3030040.png" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3ciIHN0cm9rZS13aWR0aD0iMiI+PHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBkPSJNMTMgMTBWM0w0IDE0aDd2N2w5LTExaC03eiIvPjwvc3ZnPg=='" alt="K" class="w-6 h-6 mr-2 filter invert">
+                        Xuất Excel cho Kahoot!
+                    </button>
+                </div>
                 <div id="json_error_msg" class="text-red-500 text-sm mt-4 text-center hidden font-bold"></div>
             </div>
 
@@ -199,11 +218,19 @@
                     </div>
                 </div>
 
-                <!-- Nút Xuất File -->
+                <!-- Nút Xuất File Đã Cập Nhật 2 Platform -->
                 <div id="export_container" class="mt-8 pt-6 border-t border-gray-200 hidden">
-                    <button onclick="exportExcel()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all flex items-center justify-center text-lg uppercase tracking-wide">
-                        Xuất File Excel (.XLSX) Chuẩn Quizizz
-                    </button>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <button onclick="exportQuizizzEditor()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-4 rounded-xl shadow-lg transition-all flex items-center justify-center text-sm md:text-base tracking-wide uppercase">
+                            <img src="https://cdn.iconscout.com/icon/free/png-256/free-quizizz-3628994-3030219.png" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3ciIHN0cm9rZS13aWR0aD0iMiI+PHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBkPSJNOSAxMmwyIDIgNC00bTYgMmE5IDkgMCAxMS0xOCAwIDkgOSAwIDAxMTggMHoiLz48L3N2Zz4='" alt="Q" class="w-6 h-6 mr-2 filter invert">
+                            Xuất Excel cho Quizizz
+                        </button>
+                        
+                        <button onclick="exportKahootEditor()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-extrabold py-4 rounded-xl shadow-lg transition-all flex items-center justify-center text-sm md:text-base tracking-wide uppercase">
+                            <img src="https://cdn.iconscout.com/icon/free/png-256/free-kahoot-3628854-3030040.png" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3ciIHN0cm9rZS13aWR0aD0iMiI+PHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBkPSJNMTMgMTBWM0w0IDE0aDd2N2w5LTExaC03eiIvPjwvc3ZnPg=='" alt="K" class="w-6 h-6 mr-2 filter invert">
+                            Xuất Excel cho Kahoot!
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -231,10 +258,17 @@
                     <label class="block mb-4 text-base font-bold text-gray-800">Thầy chọn file Ma Trận Đáp Án (.xlsx / .csv) tại đây:</label>
                     <input type="file" id="uploadFile" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" class="block w-full text-sm text-gray-500 file:mr-4 file:py-3 file:px-6 file:rounded-full file:border-0 file:text-sm file:font-bold file:bg-indigo-100 file:text-indigo-700 hover:file:bg-indigo-200 mx-auto max-w-sm mb-6 cursor-pointer transition-colors">
                     
-                    <button onclick="handleFileUploadAndConvert()" class="mt-4 logo-gradient hover:opacity-90 text-white font-extrabold py-4 px-10 rounded-full shadow-xl transition-all flex items-center justify-center mx-auto text-lg tracking-wide uppercase transform hover:-translate-y-1">
-                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                        Chuyển Đổi & Tải File XSLX Mới
-                    </button>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6 max-w-lg mx-auto">
+                        <button onclick="handleFileUploadAndConvert('Quizizz')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-4 rounded-xl shadow-lg transition-all flex items-center justify-center text-sm md:text-base tracking-wide uppercase transform hover:-translate-y-1">
+                            <img src="https://cdn.iconscout.com/icon/free/png-256/free-quizizz-3628994-3030219.png" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3ciIHN0cm9rZS13aWR0aD0iMiI+PHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBkPSJNOSAxMmwyIDIgNC00bTYgMmE5IDkgMCAxMS0xOCAwIDkgOSAwIDAxMTggMHoiLz48L3N2Zz4='" alt="Q" class="w-6 h-6 mr-2 filter invert">
+                            Chuyển Quizizz
+                        </button>
+                        
+                        <button onclick="handleFileUploadAndConvert('Kahoot')" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-extrabold py-4 rounded-xl shadow-lg transition-all flex items-center justify-center text-sm md:text-base tracking-wide uppercase transform hover:-translate-y-1">
+                            <img src="https://cdn.iconscout.com/icon/free/png-256/free-kahoot-3628854-3030040.png" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3ciIHN0cm9rZS13aWR0aD0iMiI+PHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBkPSJNMTMgMTBWM0w0IDE0aDd2N2w5LTExaC03eiIvPjwvc3ZnPg=='" alt="K" class="w-6 h-6 mr-2 filter invert">
+                            Chuyển Kahoot!
+                        </button>
+                    </div>
                 </div>
                 <div id="converter_error" class="text-red-500 text-sm mt-4 text-center hidden font-bold"></div>
             </div>
@@ -242,13 +276,143 @@
         
         <!-- Footer -->
         <div class="text-center mt-8 text-gray-500 text-sm font-medium">
-            <p>Hệ thống tự động đồng bộ thời gian (120s, 480s, 300s) và chuẩn định dạng xuất theo yêu cầu của Quizizz.</p>
+            <p>Hệ thống hỗ trợ xuất trực tiếp sang định dạng Quizizz và Kahoot! siêu chuẩn.</p>
             <p class="mt-1">Chúc Thầy Lực có những giờ giảng dạy thật hiệu quả và tràn đầy cảm hứng!</p>
         </div>
     </div>
 
+    <!-- MODAL HƯỚNG DẪN SỬ DỤNG CÁC TÍNH NĂNG -->
+    <div id="guideModal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center hidden backdrop-blur-sm">
+        <div class="bg-white rounded-3xl w-full max-w-3xl max-h-[90vh] overflow-y-auto m-4 shadow-2xl modal-animate border border-gray-100 relative">
+            
+            <!-- Nút đóng Modal -->
+            <button onclick="closeGuideModal()" class="absolute top-4 right-4 bg-gray-100 hover:bg-red-100 hover:text-red-600 text-gray-500 rounded-full p-2 transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+
+            <!-- Header Modal -->
+            <div class="gradient-bg p-8 rounded-t-3xl text-white">
+                <h2 class="text-2xl md:text-3xl font-bold flex items-center">
+                    <svg class="w-8 h-8 mr-3 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    Hướng Dẫn Quy Trình Sử Dụng
+                </h2>
+                <p class="mt-2 text-indigo-100 font-medium">Tìm hiểu cách dùng 4 chức năng chính của Trợ Lý Soạn Đề</p>
+            </div>
+
+            <!-- Nội dung Hướng dẫn -->
+            <div class="p-8 space-y-8">
+                
+                <!-- Luồng 1: Dùng AI -->
+                <div>
+                    <h3 class="text-lg font-bold text-indigo-800 mb-3 border-b-2 border-indigo-100 pb-2">🅰️ CÁCH 1: SOẠN ĐỀ TỰ ĐỘNG BẰNG AI (Tab 1 & Tab 2)</h3>
+                    <div class="space-y-4 text-gray-700">
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 text-blue-600 font-bold flex items-center justify-center">1</div>
+                            <div>
+                                <p class="font-bold">Ở Tab 1 (Sinh Prompt cho AI):</p>
+                                <p class="text-sm">Thầy điền thông tin bài học, môn, lớp và số lượng câu hỏi mong muốn. Bấm <strong>Tạo Lệnh</strong> và bấm <strong>Copy Mã Lệnh</strong>.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 text-blue-600 font-bold flex items-center justify-center">2</div>
+                            <div>
+                                <p class="font-bold">Dán lệnh vào AI:</p>
+                                <p class="text-sm">Gửi đoạn lệnh vừa copy cho ChatGPT hoặc Gemini. AI sẽ tự động sinh ra một bảng câu hỏi dưới dạng mã code JSON (thường có nền đen).</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 text-blue-600 font-bold flex items-center justify-center">3</div>
+                            <div>
+                                <p class="font-bold">Ở Tab 2 (Dán JSON & Xuất):</p>
+                                <p class="text-sm">Copy lại bảng code JSON từ AI, dán vào khung. Sau đó thầy bấm Xuất Excel cho Quizizz hoặc Kahoot là hoàn thành!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Luồng 2: Tự soạn -->
+                <div>
+                    <h3 class="text-lg font-bold text-green-800 mb-3 border-b-2 border-green-100 pb-2">🅱️ CÁCH 2: TỰ SOẠN THỦ CÔNG (Tab 3)</h3>
+                    <div class="space-y-4 text-gray-700">
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-100 text-green-600 font-bold flex items-center justify-center">1</div>
+                            <div>
+                                <p class="font-bold">Nhập số lượng câu hỏi ở mục Cấu Trúc Đề (phía trên cùng).</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-100 text-green-600 font-bold flex items-center justify-center">2</div>
+                            <div>
+                                <p class="font-bold">Mở Tab 3 (Tự Soạn Thủ Công) và bấm Tạo Form.</p>
+                                <p class="text-sm">Hệ thống sẽ tạo ra các khung gõ văn bản trực quan. Thầy chỉ cần gõ nội dung và tick chọn đáp án đúng.</p>
+                                <p class="text-sm italic text-gray-500">Mẹo: Chỗ nào thầy để trống, hệ thống sẽ tự điền "Câu X", "A", "B", "C", "D" để chống lỗi.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-100 text-green-600 font-bold flex items-center justify-center">3</div>
+                            <div>
+                                <p class="font-bold">Bấm Xuất File Excel ở cuối trang.</p>
+                                <p class="text-sm">Thầy có thể tùy chọn xuất định dạng chuẩn cho <strong>Quizizz</strong> hoặc <strong>Kahoot</strong> tương tự như Tab 2.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Luồng 3: Ma trận -->
+                <div>
+                    <h3 class="text-lg font-bold text-purple-800 mb-3 border-b-2 border-purple-100 pb-2">🅲 CÁCH 3: CHUYỂN ĐỔI FILE MA TRẬN (Tab 4)</h3>
+                    <div class="space-y-4 text-gray-700">
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-purple-100 text-purple-600 font-bold flex items-center justify-center">1</div>
+                            <div>
+                                <p class="font-bold">Chuẩn bị file Excel ma trận đáp án (Phần I, II, III).</p>
+                                <p class="text-sm">Ví dụ Phần I điền A, Phần II điền DSDS, Phần III điền số -70.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-purple-100 text-purple-600 font-bold flex items-center justify-center">2</div>
+                            <div>
+                                <p class="font-bold">Mở Tab 4 (Upload & Chuyển Đổi).</p>
+                                <p class="text-sm">Tải file đó lên. Thầy bấm nút chuyển đổi để tải về file Excel hoàn chỉnh dành riêng cho nền tảng <strong>Quizizz</strong> hoặc <strong>Kahoot</strong> mong muốn.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-yellow-50 border border-yellow-200 p-4 rounded-xl text-sm text-yellow-800 font-medium">
+                    💡 Thầy có thể import file Excel tải về từ công cụ này trực tiếp vào hệ thống của Quizizz hoặc Kahoot mà không cần chỉnh sửa gì thêm!
+                </div>
+            </div>
+            
+            <!-- Footer Modal -->
+            <div class="bg-gray-50 p-6 rounded-b-3xl text-center border-t border-gray-100">
+                <button onclick="closeGuideModal()" class="bg-gray-800 hover:bg-gray-900 text-white font-bold py-3 px-10 rounded-full shadow transition-all">
+                    Đã Hiểu & Đóng Lại
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // --- CÁC HÀM HỖ TRỢ CHUNG ---
+        // --- QUẢN LÝ MODAL HƯỚNG DẪN ---
+        function openGuideModal() {
+            const modal = document.getElementById('guideModal');
+            modal.classList.remove('hidden');
+        }
+
+        function closeGuideModal() {
+            const modal = document.getElementById('guideModal');
+            modal.classList.add('hidden');
+        }
+
+        // Đóng modal khi bấm ra vùng xám bên ngoài
+        document.getElementById('guideModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeGuideModal();
+            }
+        });
+
+        // --- CÁC HÀM HỖ TRỢ CHUNG (QUIZIZZ) ---
         const QUIZIZZ_HEADERS = [
             "Question Text", "Question Type", "Option 1", "Option 2", "Option 3", "Option 4", "Option 5", 
             "Correct Answer", "Time in seconds", "Image Link", "Answer explanation"
@@ -267,6 +431,19 @@
             "Link of the image\n\n(optional)",
             "Explanation for the answer\n(optional)"
         ];
+
+        // --- CÁC HÀM HỖ TRỢ CHUNG (KAHOOT) ---
+        const KAHOOT_TEMPLATE_ROWS = [
+            ["", "", "", "", "", "", "", ""],
+            ["", "Quiz template", "", "", "", "", "", ""],
+            ["", "Add questions, at least two answer alternatives, time limit and choose correct answers (at least one). Have fun creating your awesome quiz!", "", "", "", "", "", ""],
+            ["", "Remember: questions have a limit of 120 characters and answers can have 75 characters max. Text will turn red in Excel or Google Docs if you exceed this limit. If several answers are correct, separate them with a comma.", "", "", "", "", "", ""],
+            ["", "See an example question below (don't forget to overwrite this with your first question!)", "", "", "", "", "", ""],
+            ["", "And remember,  if you're not using Excel you need to export to .xlsx format before you upload to Kahoot!", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", ""],
+            ["", "Question - max 120 characters", "Answer 1 - max 75 characters", "Answer 2 - max 75 characters", "Answer 3 - max 75 characters", "Answer 4 - max 75 characters", "Time limit (sec) – 5, 10, 20, 30, 60, 90, 120, or 240 secs", "Correct answer(s) - choose at least one"]
+        ];
+        const KAHOOT_VALID_TIMES = [5, 10, 20, 30, 60, 90, 120, 240];
 
         // --- XỬ LÝ CHUYỂN TAB ---
         function switchTab(tab) {
@@ -346,7 +523,7 @@ Số lượng cần tạo: ${mcq} câu Trắc nghiệm 1 đáp án, ${checkbox} 
             setTimeout(() => msg.classList.add('hidden'), 2000);
         }
 
-        // --- TÍNH NĂNG 2: TỰ SOẠN ĐỀ VÀ XUẤT EXCEL ---
+        // --- TÍNH NĂNG 2: TỰ SOẠN ĐỀ ---
         let questionData = [];
 
         function generateEditor() {
@@ -475,10 +652,9 @@ Số lượng cần tạo: ${mcq} câu Trắc nghiệm 1 đáp án, ${checkbox} 
             return card;
         }
 
-        function exportExcel() {
+        // --- XUẤT EXCEL THỦ CÔNG TỪ TAB 3 (QUIZIZZ) ---
+        function exportQuizizzEditor() {
             const aoa = [];
-            
-            // Đẩy dòng tiêu đề và dòng hướng dẫn chuẩn vào file Excel
             aoa.push(QUIZIZZ_HEADERS);
             aoa.push(QUIZIZZ_INSTRUCTIONS);
 
@@ -490,7 +666,6 @@ Số lượng cần tạo: ${mcq} câu Trắc nghiệm 1 đáp án, ${checkbox} 
                 row[0] = text !== "" ? text : `Câu ${index}`; 
                 row[1] = q.type; 
                 
-                // Thời gian
                 if (q.type === 'Multiple Choice') row[8] = "120";
                 else if (q.type === 'Checkbox') row[8] = "480";
                 else if (q.type === 'Fill-in-the-Blank') row[8] = "300";
@@ -516,7 +691,7 @@ Số lượng cần tạo: ${mcq} câu Trắc nghiệm 1 đáp án, ${checkbox} 
                                 correctArr.push(i);
                             }
                         }
-                        row[7] = correctArr.join(','); 
+                        row[7] = correctArr.length > 0 ? correctArr.join(',') : "1"; 
                     }
 
                 } else if (q.type === 'Fill-in-the-Blank') {
@@ -529,11 +704,74 @@ Số lượng cần tạo: ${mcq} câu Trắc nghiệm 1 đáp án, ${checkbox} 
                 aoa.push(row);
             });
 
-            downloadXLSX(aoa);
+            downloadXLSX(aoa, "Quizizz");
         }
 
+        // --- XUẤT EXCEL THỦ CÔNG TỪ TAB 3 (KAHOOT) ---
+        function exportKahootEditor() {
+            const aoa = [];
+            KAHOOT_TEMPLATE_ROWS.forEach(row => aoa.push([...row]));
+
+            questionData.forEach((q, idx) => {
+                let row = Array(8).fill("");
+                let index = q.id;
+                
+                let text = document.getElementById(`q_${index}_text`).value.trim();
+                row[0] = idx + 1;
+                row[1] = text !== "" ? text : `Câu ${index}`; 
+                
+                let qTime = 60;
+                let opt1, opt2, opt3, opt4;
+
+                if (q.type === 'Multiple Choice' || q.type === 'Checkbox') {
+                    opt1 = document.getElementById(`q_${index}_opt1`).value.trim();
+                    opt2 = document.getElementById(`q_${index}_opt2`).value.trim();
+                    opt3 = document.getElementById(`q_${index}_opt3`).value.trim();
+                    opt4 = document.getElementById(`q_${index}_opt4`).value.trim();
+
+                    row[2] = opt1 !== "" ? opt1 : "A";
+                    row[3] = opt2 !== "" ? opt2 : "B";
+                    row[4] = opt3 !== "" ? opt3 : "C";
+                    row[5] = opt4 !== "" ? opt4 : "D";
+
+                    if (q.type === 'Multiple Choice') {
+                        let correctRadio = document.querySelector(`input[name="q_${index}_correct"]:checked`);
+                        row[7] = correctRadio ? correctRadio.value : "1";
+                        qTime = 120;
+                    } else {
+                        let correctArr = [];
+                        for(let i=1; i<=4; i++) {
+                            if(document.getElementById(`q_${index}_chk${i}`).checked) {
+                                correctArr.push(i);
+                            }
+                        }
+                        row[7] = correctArr.length > 0 ? correctArr.join(',') : "1";
+                        qTime = 480;
+                    }
+                } else if (q.type === 'Fill-in-the-Blank') {
+                    opt1 = document.getElementById(`q_${index}_opt1`).value.trim();
+                    row[2] = opt1 !== "" ? opt1 : "Đáp án";
+                    row[3] = document.getElementById(`q_${index}_opt2`).value.trim();
+                    if(row[3] === "") row[3] = "B"; // Kahoot cần ít nhất 2 đáp án
+                    row[4] = document.getElementById(`q_${index}_opt3`).value.trim();
+                    row[7] = "1"; 
+                    qTime = 300;
+                }
+                
+                let kTime = KAHOOT_VALID_TIMES.reduce((prev, curr) => 
+                    Math.abs(curr - qTime) < Math.abs(prev - qTime) ? curr : prev
+                );
+                row[6] = kTime;
+                
+                aoa.push(row);
+            });
+
+            downloadXLSX(aoa, "Kahoot");
+        }
+
+
         // --- TÍNH NĂNG 3: ĐỌC FILE TẢI LÊN & CHUYỂN ĐỔI ---
-        function handleFileUploadAndConvert() {
+        function handleFileUploadAndConvert(platform) {
             const errorDiv = document.getElementById('converter_error');
             errorDiv.classList.add('hidden');
             errorDiv.innerText = "";
@@ -555,7 +793,12 @@ Số lượng cần tạo: ${mcq} câu Trắc nghiệm 1 đáp án, ${checkbox} 
                     const worksheet = workbook.Sheets[firstSheetName];
                     
                     const json = XLSX.utils.sheet_to_json(worksheet, {header: 1});
-                    convertDataToQuizizz(json);
+                    
+                    if (platform === 'Quizizz') {
+                        convertDataToQuizizz(json);
+                    } else {
+                        convertDataToKahoot(json);
+                    }
                 } catch (error) {
                     showError('Rất tiếc, đã có lỗi khi đọc file. Thầy kiểm tra lại định dạng file xem có đúng bảng ma trận không nhé.');
                     console.error(error);
@@ -564,6 +807,7 @@ Số lượng cần tạo: ${mcq} câu Trắc nghiệm 1 đáp án, ${checkbox} 
             reader.readAsArrayBuffer(file);
         }
 
+        // Xử lý chuyển đổi file Upload -> Quizizz
         function convertDataToQuizizz(rows) {
             const aoa = [];
             
@@ -598,8 +842,6 @@ Số lượng cần tạo: ${mcq} câu Trắc nghiệm 1 đáp án, ${checkbox} 
                     else if(ans === 'D') row[7] = "4";
                     else row[7] = "1"; 
 
-                    parsedCount++;
-                    aoa.push(row);
                 } else if (phan === 'II') {
                     row[1] = "Checkbox";
                     row[8] = "480"; // 480s
@@ -612,17 +854,17 @@ Số lượng cần tạo: ${mcq} câu Trắc nghiệm 1 đáp án, ${checkbox} 
                             correctArr.push(j + 1); 
                         }
                     }
-                    row[7] = correctArr.join(',');
-                    parsedCount++;
-                    aoa.push(row);
+                    row[7] = correctArr.length > 0 ? correctArr.join(',') : "1";
+                    
                 } else if (phan === 'III') {
                     row[1] = "Fill-in-the-Blank";
                     row[8] = "300"; // 300s
                     row[2] = dapAn !== "" ? dapAn : "Đáp án";
                     row[7] = ""; 
-                    parsedCount++;
-                    aoa.push(row);
                 }
+                
+                parsedCount++;
+                aoa.push(row);
             }
 
             if(parsedCount === 0) {
@@ -630,17 +872,90 @@ Số lượng cần tạo: ${mcq} câu Trắc nghiệm 1 đáp án, ${checkbox} 
                 return;
             }
 
-            downloadXLSX(aoa);
+            downloadXLSX(aoa, "Quizizz");
         }
 
+        // Xử lý chuyển đổi file Upload -> Kahoot
+        function convertDataToKahoot(rows) {
+            const aoa = [];
+            KAHOOT_TEMPLATE_ROWS.forEach(row => aoa.push([...row]));
+            
+            let parsedCount = 0;
+
+            for (let i = 0; i < rows.length; i++) {
+                let r = rows[i];
+                if (!r || r.length === 0 || !r[0]) continue;
+
+                let phan = r[0].toString().trim().toUpperCase();
+                
+                if (phan !== 'I' && phan !== 'II' && phan !== 'III') continue;
+
+                let cau = (r[1] !== undefined && r[1] !== null) ? r[1].toString().trim() : (parsedCount + 1);
+                let dapAn = (r[2] !== undefined && r[2] !== null) ? r[2].toString().trim() : "";
+
+                let row = Array(8).fill("");
+                row[0] = parsedCount + 1;
+                row[1] = `Câu ${cau}`;
+
+                let qTime = 60;
+
+                if (phan === 'I') {
+                    qTime = 120; 
+                    row[2] = "A"; row[3] = "B"; row[4] = "C"; row[5] = "D";
+                    
+                    let ans = dapAn.toUpperCase();
+                    if(ans === 'A') row[7] = "1";
+                    else if(ans === 'B') row[7] = "2";
+                    else if(ans === 'C') row[7] = "3";
+                    else if(ans === 'D') row[7] = "4";
+                    else row[7] = "1"; 
+
+                } else if (phan === 'II') {
+                    qTime = 480; 
+                    row[2] = "A"; row[3] = "B"; row[4] = "C"; row[5] = "D";
+                    
+                    let correctArr = [];
+                    let ansStr = dapAn.toUpperCase();
+                    for(let j = 0; j < ansStr.length && j < 4; j++){
+                        if(ansStr[j] === 'D') {
+                            correctArr.push(j + 1); 
+                        }
+                    }
+                    row[7] = correctArr.length > 0 ? correctArr.join(',') : "1";
+                    
+                } else if (phan === 'III') {
+                    qTime = 300; 
+                    row[2] = dapAn !== "" ? dapAn : "Đáp án";
+                    row[3] = "Khác"; 
+                    row[7] = "1"; 
+                }
+                
+                let kTime = KAHOOT_VALID_TIMES.reduce((prev, curr) => 
+                    Math.abs(curr - qTime) < Math.abs(prev - qTime) ? curr : prev
+                );
+                row[6] = kTime;
+                
+                parsedCount++;
+                aoa.push(row);
+            }
+
+            if(parsedCount === 0) {
+                showError("Không tìm thấy dữ liệu hợp lệ (Cột 1 phải chứa I, II hoặc III). Thầy xem lại file giúp em nhé.");
+                return;
+            }
+
+            downloadXLSX(aoa, "Kahoot");
+        }
+
+
         // --- Hàm hỗ trợ tải file Excel chung ---
-        function downloadXLSX(aoa) {
+        function downloadXLSX(aoa, platform = "Quizizz") {
             const ws = XLSX.utils.aoa_to_sheet(aoa); 
             const wb = XLSX.utils.book_new();        
-            XLSX.utils.book_append_sheet(wb, ws, "Quizizz"); 
+            XLSX.utils.book_append_sheet(wb, ws, platform); 
 
             let topicName = document.getElementById('lesson_topic').value.trim();
-            const fileName = `VTL_Quizizz_${topicName || 'De_Thi_Moi'}.xlsx`;
+            const fileName = `VTL_${platform}_${topicName || 'De_Thi_Moi'}.xlsx`;
             
             XLSX.writeFile(wb, fileName);
         }
@@ -682,33 +997,46 @@ Số lượng cần tạo: ${mcq} câu Trắc nghiệm 1 đáp án, ${checkbox} 
             return result;
         }
 
-        // --- XỬ LÝ JSON TỪ AI VÀ XUẤT EXCEL ---
+        // --- Hàm Parsing JSON dùng chung ---
+        function parseJsonInput() {
+            let rawText = document.getElementById('json_input_area').value.trim();
+            if (!rawText) {
+                throw new Error("EMPTY_INPUT");
+            }
+
+            let jsonStr = rawText;
+            const match = rawText.match(/\[[\s\S]*\]/); 
+            if (match) {
+                jsonStr = match[0];
+            }
+            
+            jsonStr = sanitizeJSONString(jsonStr);
+            const jsonData = JSON.parse(jsonStr);
+
+            if (!Array.isArray(jsonData) || jsonData.length === 0) {
+                throw new Error("INVALID_ARRAY");
+            }
+            
+            return jsonData;
+        }
+
+        function showJsonError(errorDiv, error) {
+            if (error.message === "EMPTY_INPUT") {
+                errorDiv.innerText = "Thầy Lực chưa dán mã JSON vào khung. Thầy kiểm tra lại nhé!";
+            } else {
+                console.error("Lỗi parse JSON:", error);
+                errorDiv.innerText = "Có lỗi khi đọc mã JSON. Thầy Lực đảm bảo copy ĐỦ đoạn mã từ dấu '[' đến dấu ']' nhé!";
+            }
+            errorDiv.classList.remove('hidden');
+        }
+
+        // --- XỬ LÝ XUẤT EXCEL CHO QUIZIZZ TỪ JSON ---
         function handleJSONExport() {
             const errorDiv = document.getElementById('json_error_msg');
             errorDiv.classList.add('hidden');
-            errorDiv.innerText = "";
-
-            let rawText = document.getElementById('json_input_area').value.trim();
-            if (!rawText) {
-                errorDiv.innerText = "Thầy Lực chưa dán mã JSON vào khung. Thầy kiểm tra lại nhé!";
-                errorDiv.classList.remove('hidden');
-                return;
-            }
 
             try {
-                let jsonStr = rawText;
-                const match = rawText.match(/\[[\s\S]*\]/); 
-                if (match) {
-                    jsonStr = match[0];
-                }
-                
-                jsonStr = sanitizeJSONString(jsonStr);
-                const jsonData = JSON.parse(jsonStr);
-
-                if (!Array.isArray(jsonData) || jsonData.length === 0) {
-                    throw new Error("Dữ liệu JSON không hợp lệ.");
-                }
-
+                const jsonData = parseJsonInput();
                 const aoa = [];
                 aoa.push(QUIZIZZ_HEADERS);
                 aoa.push(QUIZIZZ_INSTRUCTIONS);
@@ -736,12 +1064,51 @@ Số lượng cần tạo: ${mcq} câu Trắc nghiệm 1 đáp án, ${checkbox} 
                     aoa.push(row);
                 });
 
-                downloadXLSX(aoa);
-
+                downloadXLSX(aoa, "Quizizz");
             } catch (error) {
-                console.error("Lỗi parse JSON:", error);
-                errorDiv.innerText = "Có lỗi khi đọc mã JSON. Thầy Lực đảm bảo copy ĐỦ đoạn mã từ dấu '[' đến dấu ']' nhé!";
-                errorDiv.classList.remove('hidden');
+                showJsonError(errorDiv, error);
+            }
+        }
+
+        // --- XỬ LÝ XUẤT EXCEL CHO KAHOOT TỪ JSON ---
+        function handleKahootExport() {
+            const errorDiv = document.getElementById('json_error_msg');
+            errorDiv.classList.add('hidden');
+
+            try {
+                const jsonData = parseJsonInput();
+                const aoa = [];
+                
+                // Copy 8 hàng template chuẩn của Kahoot
+                KAHOOT_TEMPLATE_ROWS.forEach(row => aoa.push([...row]));
+
+                jsonData.forEach((item, idx) => {
+                    let row = Array(8).fill("");
+                    
+                    row[0] = idx + 1; // Số thứ tự câu hỏi
+                    row[1] = item.QuestionText ? item.QuestionText.toString() : `Câu ${idx + 1}`;
+                    row[2] = item.Option1 ? item.Option1.toString() : "A"; // Kahoot yêu cầu ít nhất 2 đáp án
+                    row[3] = item.Option2 ? item.Option2.toString() : "B";
+                    row[4] = item.Option3 ? item.Option3.toString() : "";
+                    row[5] = item.Option4 ? item.Option4.toString() : "";
+                    
+                    // Xử lý thời gian cho Kahoot (chọn mốc gần nhất)
+                    let qTime = parseInt(item.Time) || 60;
+                    let kTime = KAHOOT_VALID_TIMES.reduce((prev, curr) => 
+                        Math.abs(curr - qTime) < Math.abs(prev - qTime) ? curr : prev
+                    );
+                    row[6] = kTime;
+                    
+                    // Đáp án đúng (Kahoot luôn yêu cầu có đáp án đúng, nếu Fill-in thì default là "1")
+                    let correctAns = item.CorrectAnswer ? item.CorrectAnswer.toString() : "1";
+                    row[7] = correctAns;
+
+                    aoa.push(row);
+                });
+
+                downloadXLSX(aoa, "Kahoot");
+            } catch (error) {
+                showJsonError(errorDiv, error);
             }
         }
     </script>
